@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home System</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <script src="hamburger.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+<body>
+
+    
+    <header>
+        <h1 id="logo">Smart Home System</h1>
+    </header>
+
+
+    <nav>
+        <div id="nav-left">
+            <div id="hamburger-menu">&#9776;</div>
+        </div>
+        <div id="nav-center">
+            <div id="room-list">
+                <span class="room-tab" data-room="Living Room">Living Room</span>
+                <span class="room-tab" data-room="Bathroom">Bathroom</span>
+                <span class="room-tab" data-room="Bedroom">Bedroom</span>
+            </div>
+        </div>
+        <div id="nav-right">
+            <button id="add-room-btn">Add Room</button>
+        </div>
+    </nav>
+
+
+    <div id="sidebar" class="sidebar">
+        <button id="close-btn">&times;</button>
+        <a href="index.html">Home</a>
+        <a href="settings.html">Settings</a>
+        <a href="charts.html">Charts</a>
+        <a href="notifications.html">Notifications</a>
+    </div>
+
+
+    <main>
+        <section id="room-content">
+            <span>
+                <h2 id="room-title">Living Room</h2>
+                <button id="add-device-btn" class="add-btn">Add Device</button>
+                <button id="delete-room-btn" class="delete-btn">Delete Room</button>
+            </span>
+
+            
+            <div id="device-header">
+                <span class="device-title">Device Name</span>
+                <span class="device-title">Device Status</span>
+                <span class="device-title">Actions</span>
+            </div>
+
+            <div id="device-list"></div>
+            
+        </section>
+    </main>
+
+
+    <div id="add-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal-btn">&times;</span>
+            <h3>Add Item</h3>
+            <label for="item-name">Enter Name:</label>
+            <input type="text" id="item-name">
+            <button id="apply-btn">Apply</button>
+        </div>
+    </div>
+
+
+</body>
+</html>
+

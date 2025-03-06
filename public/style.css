@@ -1,0 +1,536 @@
+/* 
+body{
+  margin: 0;
+  font-family: 'Poppins';
+}
+
+
+header {
+  background-color: #0288d1;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+#logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+
+nav {
+  background-color: #01579b;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+#nav-left {
+  flex: 1;
+  display: flex;
+  place-items: center;
+  position: relative;
+  
+}
+
+#hamburger-menu {
+  cursor: pointer;
+  font-size: 24px;
+  padding: 5px auto;
+  position: absolute;
+  left: 5px;
+}
+
+#nav-center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+}
+
+#room-content > span {
+  display: flex;
+  flex-direction: row;
+  margin: 20px 0; 
+  position: relative;
+}
+
+#room-list {
+  display: flex;
+  gap: 10px;
+}
+
+.room-tab {
+  align-self: center;
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #0288d1;
+  border-radius: 5px;
+}
+
+#nav-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#add-room-btn {
+  background-color: #ff9800;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  width: 100px;
+}
+
+#room-title {
+  margin: 0 5px;
+
+}
+
+#add-device-btn {
+  height: fit-content;
+  background-color: #0088ff;
+  color: white;
+  padding: 7px 10px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  width: 100px;
+}
+
+
+#device-header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  font-weight: bold;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-bottom: 2px solid #ccc;
+  text-align: center;
+}
+
+.device {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+.device span {
+  display: block;
+  text-align: center;
+}
+
+.toggle-btn {
+  background-color: rgb(76, 175, 80);
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin: 0px 5px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+}
+
+.remove-btn {
+  background-color: rgb(244, 67, 54);
+  cursor: pointer;
+  color: white !important;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin: 0px 5px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+}
+
+.toggle-btn, .remove-btn {
+  justify-self: center; 
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+
+.device .toggle-btn, .device .remove-btn {
+  display: inline-block;
+}
+
+.toggle-btn.active {
+  background-color: #dc3545;
+}
+
+.remove-btn {
+  background-color: #f44336;
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+#close-modal-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#apply-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+
+.sidebar {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #333;
+  padding-top: 20px;
+  z-index: 10;
+}
+
+.sidebar a {
+  display: block;
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background-color: #575757;
+}
+
+
+.hidden {
+    display: none;
+}
+
+#close-btn {
+  color: white;
+  background-color: #0088ff;
+  font-size: 30px;
+  cursor: pointer;
+  text-align: right;
+  margin: 10px;
+  border: 0;
+} */
+
+
+
+
+
+ 
+body{
+  margin: 0;
+  font-family: 'Poppins';
+}
+
+
+header {
+  background-color: #0288d1;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+#logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+nav {
+  background-color: #01579b;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+#nav-left {
+  flex: 1;
+  display: flex;
+  place-items: center;
+  position: relative;
+  padding: 10px;
+}
+
+#hamburger-menu {
+  float: left;
+  cursor: pointer;
+  font-size: 24px;
+  position: absolute;
+  left: 10px;
+}
+
+#nav-center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+}
+
+#room-content > span {
+  display: flex;
+  flex-direction: row;
+  margin: 20px 0; 
+  position: relative;
+}
+
+#room-list {
+  display: flex;
+  gap: 10px;
+}
+
+.room-tab {
+  align-self: center;
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #0288d1;
+  border-radius: 5px;
+}
+
+#nav-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#add-room-btn {
+  background-color: #ff9800;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  width: 100px;
+}
+
+#room-title {
+  margin: 0 5px;
+
+}
+
+#add-device-btn {
+  height: fit-content;
+  background-color: #0088ff;
+  color: white;
+  padding: 7px 10px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  width: 100px;
+}
+
+
+#device-header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  font-weight: bold;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-bottom: 2px solid #ccc;
+  text-align: center;
+}
+
+.device {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+.device span {
+  display: block;
+  text-align: center;
+}
+
+.toggle-btn {
+  background-color: rgb(76, 175, 80);
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin: 0px 5px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+}
+
+.remove-btn {
+  background-color: rgb(244, 67, 54);
+  cursor: pointer;
+  color: white !important;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin: 0px 5px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+}
+
+.toggle-btn, .remove-btn {
+  justify-self: center; 
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.toggle-btn.active {
+  background-color: #dc3545;
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+#close-modal-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#apply-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.content-section {
+  margin: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+.dark-mode header, .dark-mode nav, .dark-mode .sidebar {
+  background-color: #222;
+}
+
+.dark-mode .content-section {
+  background-color: #333;
+  color: white;
+}
+
+.dark-mode .toggle-btn {
+  background-color: #444;
+}
+
+
+.sidebar {
+  display: none;
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #333;
+  padding-top: 20px;
+  z-index: 10;
+}
+
+.sidebar a {
+  display: block;
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background-color: #575757;
+}
+
+#sidebar {
+  position: absolute;
+  z-index: 1;
+  right: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+#close-btn {
+  color: white;
+  background-color: #0088ff;
+  font-size: 30px;
+  cursor: pointer;
+  text-align: right;
+  margin: 10px;
+  border: 0;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  padding: 7px 10px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 120px; /* Position it to the left of "+ Add Device" */
+  width: 100px;
+}
