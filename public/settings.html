@@ -1,41 +1,81 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Home System</title>
+    <title>Device Notifications</title>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
     <script src="hamburger.js" defer></script>
+    <script src="notifications.js" type="module"></script>
     <script src="app.js" defer></script>
+    <script src="settings.js" defer></script>
+    <script src="charts.js" defer></script>
+    <script src="theme.js"></script>
+
 </head>
 <body>
-    <header>
-        <h1 id="logo">Smart Home System</h1>
-    </header>
-    <nav>
-        <div id="nav-left">
-            <div id="hamburger-menu">&#9776;</div>
-        </div>
-    </nav>
-    <div id="sidebar" class="sidebar">
-        <button id="close-btn">&times;</button>
-        <a href="index.html">Home</a>
-        <a href="settings.html">Settings</a>
-        <a href="charts.html">Charts</a>
-        <a href="notifications.html">Notifications</a>
+
+<header>
+    <h1 id="logo">Smart Home System</h1>
+</header>
+
+<nav>
+    <div id="nav-left">
+        <div id="hamburger-menu">&#9776;</div>
     </div>
-    <main>
-        <section class="content-section">
-            <h2>General Settings</h2>
-            <label for="theme-toggle">Dark Mode:</label>
-            <input type="checkbox" id="theme-toggle">
-        </section>
-    </main>
+    <div id="nav-center">
+        <h2 style="color: white; margin: 0;">Settings</h2>
+    </div>
+    <div id="nav-right"></div>
+</nav>
+    <div id="sidebar" class="sidebar">
+    <button id="close-btn">&times;</button>
+    <a href="index.html">Home</a>
+    <a href="settings.html">Settings</a>
+    <a href="charts.html">Charts</a>
+    <a href="notifications.html">Notifications</a>
+    <a href="login.html">Login</a>
+    </div>
+  <section class="settings-container">
+    <div class="settings-card">
+      <h3>General Settings</h3>
+      <div class="setting-item">
+        <label for="dark-mode-toggle">Dark Mode:</label>
+        <input type="checkbox" id="dark-mode-toggle">
+      </div>
+      <hr>
+      <div class="setting-item">
+        <button id="profile-btn">Profile</button>
+      </div>
+      <div class="setting-item">
+        <button id="logout-btn">Logout</button>
+      </div>
+    </section>
+    <section class="settings-container">
+      <div class="settings-card">
+        <h3>Manage Users</h3>
+        <div class="setting-item" id="manage-users-card" style="display: none;">
+        <table class="permissions-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Admin</th>
+              <th>Family Member</th>
+              <th>Guest</th>
+            </tr>
+          </thead>
+        <tbody id="permissions-table-body">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+      <div class="save-permissions-btn-wrapper">
+        <button id="save-permissions-btn">Save Changes</button>
+    </div>
+    </div>
+    </div>
+  </section>
 </body>
 </html>
+
 

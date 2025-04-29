@@ -1,259 +1,3 @@
-/* 
-body{
-  margin: 0;
-  font-family: 'Poppins';
-}
-
-
-header {
-  background-color: #0288d1;
-  color: white;
-  padding: 10px;
-  text-align: center;
-}
-
-#logo {
-  font-size: 24px;
-  font-weight: bold;
-  margin: 0;
-}
-
-
-nav {
-  background-color: #01579b;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-}
-
-#nav-left {
-  flex: 1;
-  display: flex;
-  place-items: center;
-  position: relative;
-  
-}
-
-#hamburger-menu {
-  cursor: pointer;
-  font-size: 24px;
-  padding: 5px auto;
-  position: absolute;
-  left: 5px;
-}
-
-#nav-center {
-  flex: 2;
-  display: flex;
-  justify-content: center;
-}
-
-#room-content > span {
-  display: flex;
-  flex-direction: row;
-  margin: 20px 0; 
-  position: relative;
-}
-
-#room-list {
-  display: flex;
-  gap: 10px;
-}
-
-.room-tab {
-  align-self: center;
-  cursor: pointer;
-  padding: 5px 10px;
-  background-color: #0288d1;
-  border-radius: 5px;
-}
-
-#nav-right {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-}
-
-#add-room-btn {
-  background-color: #ff9800;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
-  width: 100px;
-}
-
-#room-title {
-  margin: 0 5px;
-
-}
-
-#add-device-btn {
-  height: fit-content;
-  background-color: #0088ff;
-  color: white;
-  padding: 7px 10px;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  right: 10px;
-  width: 100px;
-}
-
-
-#device-header {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  font-weight: bold;
-  padding: 10px;
-  background-color: #f1f1f1;
-  border-bottom: 2px solid #ccc;
-  text-align: center;
-}
-
-.device {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-  text-align: center;
-}
-
-.device span {
-  display: block;
-  text-align: center;
-}
-
-.toggle-btn {
-  background-color: rgb(76, 175, 80);
-  color: white;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  margin: 0px 5px;
-  border-width: initial;
-  border-style: none;
-  border-color: initial;
-  border-image: initial;
-}
-
-.remove-btn {
-  background-color: rgb(244, 67, 54);
-  cursor: pointer;
-  color: white !important;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  margin: 0px 5px;
-  border-width: initial;
-  border-style: none;
-  border-color: initial;
-  border-image: initial;
-}
-
-.toggle-btn, .remove-btn {
-  justify-self: center; 
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 0 5px;
-}
-
-
-.device .toggle-btn, .device .remove-btn {
-  display: inline-block;
-}
-
-.toggle-btn.active {
-  background-color: #dc3545;
-}
-
-.remove-btn {
-  background-color: #f44336;
-}
-
-
-.modal {
-  display: none;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-}
-
-.modal-content {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  position: relative;
-}
-
-#close-modal-btn {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  cursor: pointer;
-  font-size: 20px;
-}
-
-#apply-btn {
-  background-color: #4caf50;
-  color: white;
-  padding: 5px;
-  border: none;
-  cursor: pointer;
-}
-
-
-.sidebar {
-  display: none;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 250px;
-  height: 100%;
-  background-color: #333;
-  padding-top: 20px;
-  z-index: 10;
-}
-
-.sidebar a {
-  display: block;
-  padding: 10px;
-  color: white;
-  text-decoration: none;
-}
-
-.sidebar a:hover {
-  background-color: #575757;
-}
-
-
-.hidden {
-    display: none;
-}
-
-#close-btn {
-  color: white;
-  background-color: #0088ff;
-  font-size: 30px;
-  cursor: pointer;
-  text-align: right;
-  margin: 10px;
-  border: 0;
-} */
-
-
-
-
-
- 
 body{
   margin: 0;
   font-family: 'Poppins';
@@ -311,36 +55,26 @@ nav {
   position: relative;
 }
 
-#room-list {
-  display: flex;
-  gap: 10px;
-}
-
-.room-tab {
-  align-self: center;
-  cursor: pointer;
-  padding: 5px 10px;
-  background-color: #0288d1;
-  border-radius: 5px;
-}
-
 #nav-right {
   flex: 1;
   display: flex;
   justify-content: flex-end;
+  gap: 10px;
 }
 
 #add-room-btn {
   background-color: #ff9800;
   color: white;
-  padding: 5px 10px;
+  padding: 7px 10px;
   border: none;
   cursor: pointer;
   width: 100px;
+  font-size: 13px;
+  border-radius: 6px;
 }
 
 #room-title {
-  margin: 0 5px;
+  margin: 0 10px;
 
 }
 
@@ -354,6 +88,7 @@ nav {
   position: absolute;
   right: 10px;
   width: 100px;
+  border-radius: 6px;
 }
 
 
@@ -379,6 +114,10 @@ nav {
 .device span {
   display: block;
   text-align: center;
+}
+
+span.device-title {
+  color: #000;
 }
 
 .toggle-btn {
@@ -416,9 +155,8 @@ nav {
 }
 
 .toggle-btn.active {
-  background-color: #dc3545;
+  background-color: rgb(244, 67, 54);
 }
-
 
 .modal {
   display: none;
@@ -440,8 +178,16 @@ nav {
 }
 
 #close-modal-btn {
-  position: absolute;
-  right: 10px;
+  position: relative;
+  right: 0px;
+  top: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#close-schedule-modal {
+  position: relative;
+  right: 0px;
   top: 10px;
   cursor: pointer;
   font-size: 20px;
@@ -463,24 +209,81 @@ nav {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.settings-container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.settings-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.setting-item {
+  margin: 15px 0;
+}
+
+.setting-item label {
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.setting-item button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #0077cc;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.setting-item button:hover {
+  background-color: #005fa3;
+}
+
+/* Dark mode support */
 .dark-mode {
   background-color: #121212;
-  color: white;
+  color: #e0e0e0;
 }
 
-.dark-mode header, .dark-mode nav, .dark-mode .sidebar {
-  background-color: #222;
+.dark-mode .settings-card {
+  background-color: #1e1e1e;
 }
 
-.dark-mode .content-section {
+.dark-mode .setting-item button {
+  background-color: #0077cc;
+  color: #fff;
+}
+
+.permissions-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.permissions-table th,
+.permissions-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.permissions-table th {
+  background-color: #f2f2f2;
+}
+
+.dark-mode .permissions-table th {
   background-color: #333;
-  color: white;
 }
 
-.dark-mode .toggle-btn {
-  background-color: #444;
+.save-permissions-btn-wrapper {
+  margin-top: 35px;
+  text-align: center;
 }
-
 
 .sidebar {
   display: none;
@@ -495,7 +298,7 @@ nav {
 
 .sidebar a {
   display: block;
-  padding: 10px;
+  padding: 30px;
   color: white;
   text-decoration: none;
 }
@@ -516,7 +319,7 @@ nav {
 
 #close-btn {
   color: white;
-  background-color: #0088ff;
+  background-color: #333333;
   font-size: 30px;
   cursor: pointer;
   text-align: right;
@@ -531,6 +334,509 @@ nav {
   border: none;
   cursor: pointer;
   position: absolute;
-  right: 120px; /* Position it to the left of "+ Add Device" */
+  right: 120px; 
   width: 100px;
+  border-radius: 6px;
 }
+
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.content-section {
+  margin: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#select-room-btn {
+  background-color: #4caf50;
+  color: white;
+  width: 100px;
+  font-size: 13px;
+  padding: 7px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.select-room-container {
+  position: relative;
+  display: inline-block;
+}
+
+#room-dropdown {
+  position: absolute;
+  top: 38px;
+  right: 0;
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  width: 100%;
+  z-index: 100;
+  display: none;
+  flex-direction: column;
+}
+
+#room-dropdown span {
+  padding: 8px;
+  cursor: pointer;
+  background-color: white;
+}
+
+#room-dropdown span:hover {
+  background-color: #f0f0f0;
+}
+
+#room-dropdown.show {
+  display: flex;
+}
+
+#room-title {
+  margin: 0 10px;
+}
+
+.notifications-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.notification-section {
+  width: 100%;
+  max-width: 700px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+#notificationsList {
+  margin-top: 15px;
+}
+
+.notification-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f1f6fb;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 15px 20px;
+  margin-bottom: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.notification-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.notification-delete-btn {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.notification-delete-btn:hover {
+  background-color: #e60000;
+}
+
+.clear-btn-wrapper {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.clear-all-btn {
+  padding: 12px 25px;
+  font-size: 16px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.clear-all-btn:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+.empty-state {
+  text-align: center;
+  color: #777;
+  padding: 30px 0;
+  font-style: italic;
+}
+
+.empty-icon {
+  width: 80px;
+  opacity: 0.5;
+  margin-bottom: 10px;
+}
+
+.schedule-btn{
+  background-color: #077bff;
+  color: white;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#save-schedule-btn{
+  background-color: #4caf50;
+  color: white;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+#exportPDFBtn{
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.exportPDFBtn-wrapper {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#exportPDFBtn:hover {
+  background-color: #218838;
+}
+
+#deleteLogsBtn {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
+  text-align: center;
+  background-color: #f44336; 
+  color: white;
+  gap: 10px;
+}
+
+#deleteLogsBtn:hover {
+  background-color: #e22916;
+}
+
+#loginDeleteLogsBtn {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
+  text-align: center;
+  background-color: #f44336; 
+  color: white;
+  gap: 10px;
+}
+
+#loginDeleteLogsBtn:hover {
+  background-color: #e22916;
+}
+
+.styled-date {
+  padding: 6px 10px;
+  margin: 0 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: 'Poppins', sans-serif;
+}
+
+.date-filter label {
+  font-weight: 500;
+  margin-left: 5px;
+}
+
+#cancelClearAll,
+#confirmClearAll,
+#guest-ok-btn,
+#confirmDelete,
+#cancelDelete {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  flex: 1;
+  margin: 0 5px;
+}
+
+#confirmClearAll,
+#guest-ok-btn,
+#confirmDelete {
+  background-color: #28a745;
+}
+
+#confirmClearAll:hover,
+#guest-ok-btn,
+#confirmDelete:hover {
+  background-color: #218838;
+}
+
+#cancelClearAll,
+#cancelDelete {
+  background-color: #f44336;
+}
+
+#cancelClearAll:hover,
+#cancelDelete:hover {
+  background-color: #e22916;
+}
+
+#voice-control-btn{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  padding: 10px 15px;
+  border-radius: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.voice-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.voice-btn.idle {
+  background-color: green;
+}
+
+.voice-btn.listening {
+  background-color: red;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 6px red; }
+  50% { box-shadow: 0 0 18px red; }
+  100% { box-shadow: 0 0 6px red; }
+}
+
+.login-container {
+  margin: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  max-width: 100%;
+}
+
+/* Heading */
+.login-container h2 {
+  margin-bottom: 30px;
+  font-size: 32px;
+  color: #fff;
+}
+
+/* Form Styling */
+#role-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+}
+
+#role-form label {
+  font-size: 18px;
+  margin-bottom: 5px;
+  text-align: left;
+  color: #333;
+}
+
+#role-form select {
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+}
+
+/* Submit Button */
+button[type="submit"] {
+  background-color: #00c6ff;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #007bbd;
+}
+
+/* Error Message Styling */
+.error-message {
+  margin-top: 10px;
+  color: #ff6b6b;
+  font-size: 14px;
+}
+
+#filterLogsBtn {
+  padding: 10px 20px;
+  margin: 15px;
+  font-size: 14px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Schedule Modal Styles */
+#schedule-modal .modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+}
+
+#schedule-modal label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+#schedule-modal input[type="time"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+#save-schedule-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+}
+
+#save-schedule-btn:hover {
+  background-color: #45a049;
+}
+
+@media screen and (max-width: 768px) {
+  header, nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #nav-left, #nav-center, #nav-right {
+    width: 100%;
+    justify-content: center;
+    margin: 5px 0;
+    flex: none;
+  }
+
+  #add-room-btn,
+  #add-device-btn,
+  .delete-btn {
+    font-size: 13px;
+    padding: 6px;
+    width: 100px;
+    margin: 5px 3px;
+  }
+
+  #hamburger-menu {
+    float: left;
+    cursor: pointer;
+    font-size: 24px;
+    position: absolute;
+    left: 10px;
+  }
+
+  #device-header {
+    font-size: 14px;
+    padding: 6px;
+  }
+
+  .device {
+    font-size: 14px;
+    padding: 6px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .toggle-btn,
+  .remove-btn {
+    font-size: 13px;
+    padding: 6px 8px;
+    margin: 4px;
+  }
+
+  .content-section {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  #room-title {
+    font-size: 18px;
+    text-align: center;
+    margin: 10px 0;
+    padding: 0 10px;
+  }
+
+  body {
+    font-size: 15px;
+  }
+
+  #room-dropdown {
+    width: 100px;
+    right: 87px;
+  }
+
+  .select-room-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+

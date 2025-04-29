@@ -3,41 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Home System</title>
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <title>Device Notifications</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="hamburger.js" defer></script>
-    <script src="app.js"></script>
+    <script src="theme.js" defer></script>
+    <script src="notifications.js" defer></script>
 </head>
 <body>
 
-    <header>
-        <h1 id="logo">Smart Home System</h1>
-    </header>
-
-    <nav>
-        <div id="nav-left">
-            <div id="hamburger-menu">&#9776;</div>
-        </div>
-    </nav>
-
-    <div id="sidebar" class="sidebar">
-        <button id="close-btn">&times;</button>
-        <a href="index.html">Home</a>
-        <a href="settings.html">Settings</a>
-        <a href="charts.html">Charts</a>
-        <a href="notifications.html">Notifications</a>
+<header>
+    <h1 id="logo">Smart Home System</h1>
+</header>
+<nav>
+    <div id="nav-left">
+        <div id="hamburger-menu">&#9776;</div>
     </div>
+    <div id="nav-center">
+        <h2 style="color: white; margin: 0;">Device Notifications</h2>
+    </div>
+    <div id="nav-right"></div>
+</nav>
 
-    <main>
-        <section class="content-section">
-            <h2>Recent Notifications</h2>
-            <ul id="notification-list">
-                <li>No new notifications</li>
-            </ul>
+<div id="sidebar" class="sidebar">
+    <button id="close-btn">&times;</button>
+    <a href="index.html">Home</a>
+    <a href="settings.html">Settings</a>
+    <a href="charts.html">Charts</a>
+    <a href="notifications.html">Notifications</a>
+    <a href="login.html">Login</a>
+</div>
+
+<main>
+    <div class="notifications-container">
+        <section class="notification-section">
+            <h3>Device Activity</h3>
+            <div id="notificationsList"></div>
         </section>
-    </main>
-
-    <script src="app.js"></script>
+        <section class="notification-section">
+            <h3>Usage Alerts</h3>
+        </section>
+        <section class="notification-section">
+            <h3>Connectivity</h3>
+        </section>
+        <section class="notification-section">
+            <h3>Reminders</h3>
+        </section>
+        <section class="notification-section">
+            <h3>User Actions</h3>
+        </section>
+        <div class="clear-btn-wrapper">
+            <button id="clearAllBtn" class="clear-all-btn">🧹 Clear All Notifications</button>
+        </div>
+    </div>
+</main>
 </body>
 </html>
