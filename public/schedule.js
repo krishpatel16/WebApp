@@ -136,7 +136,6 @@ setInterval(() => {
 
     if (devicesChanged) {
         localStorage.setItem("devices", JSON.stringify(devices));
-        renderDevices(); // Update UI immediately
         // Trigger UI update without page reload
         if (typeof renderDevices === "function") {
             renderDevices();
