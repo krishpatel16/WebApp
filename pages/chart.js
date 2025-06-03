@@ -10,8 +10,10 @@ import BillEstimation from '../components/BillEstimation';
 import DateFilter from '../components/DateFilter';
 import GuestNoAccessModal from '../components/GuestNoAccessModal';
 import DeleteLogsConfirmationModal from '../components/DeleteLogsConfirmationModal';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
-const API_URL = 'https://75e60r3zm0.execute-api.eu-west-2.amazonaws.com/dev/device-usage-logs'; // <-- Replace with your actual API Gateway endpoint
+const API_URL = 'https://75e60r3zm0.execute-api.eu-west-2.amazonaws.com/dev/device-usage-logs';
 
 function ChartsPage() {
   const router = useRouter();
@@ -109,27 +111,35 @@ function ChartsPage() {
   };
 
   const confirmDeleteLogs = async () => {
-  const role = localStorage.getItem('userRole');
-  let usernameToDelete;
-  if (role === 'Admin' && usernameFilter.trim()) {
-    usernameToDelete = usernameFilter.trim();
-  } else {
-    usernameToDelete = localStorage.getItem('username');
-  }
-  if (!usernameToDelete || !startDate || !endDate) {
-    alert("Username, start date, and end date are required to delete logs.");
-    return;
-  }
+    // Delete only the logs currently displayed (filteredLogs)
+    if (!filteredLogs.length) {
+      alert('No logs to delete for the current filter.');
+      setDeleteConfirmationVisible(false);
+      return;
+    }
+    // Group logs by username for batch deletion
+    const logsByUser = {};
+    filteredLogs.forEach(log => {
+      if (!logsByUser[log.username]) logsByUser[log.username] = [];
+      logsByUser[log.username].push(log.timestamp);
+    });
     try {
-      await fetch(API_URL, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: usernameToDelete, startDate, endDate })
-      });
-      loadDeviceLogs(startDate, endDate);
+      for (const username in logsByUser) {
+        const timestamps = logsByUser[username].sort();
+        const startDate = timestamps[0].split('T')[0];
+        const endDate = timestamps[timestamps.length - 1].split('T')[0];
+        await fetch(API_URL, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: username, startDate, endDate })
+        });
+      }
+      await loadDeviceLogs(startDate, endDate);
+      handleFilterLogs();
       setDeleteConfirmationVisible(false);
     } catch (err) {
       console.error('Error deleting logs:', err);
+      alert('Failed to delete logs.');
     }
   };
 
@@ -170,7 +180,6 @@ function ChartsPage() {
   };
 
   const handleExportPDF = () => {
-    const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
     doc.text('Device Usage History', 14, 16);
 
@@ -194,7 +203,7 @@ function ChartsPage() {
       return [log.username, log.device, log.room, log.action, formattedDate, formattedTime];
     });
 
-    doc.autoTable({
+    autoTable(doc, {
       head: [['Username', 'Device', 'Room', 'Action', 'Date', 'Time']],
       body: rows,
       startY: 20,

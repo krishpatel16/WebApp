@@ -1,7 +1,7 @@
 import React from 'react';
 import DeviceItem from './DeviceItem';
 
-function DeviceList({ currentRoom, devices, onDeviceToggle, onDeviceRemove, onScheduleOpen, role }) {
+function DeviceList({ currentRoom, devices, onDeviceToggle, onDeviceRemove, onScheduleOpen, onBrightnessOpen, deviceStatus, role }) {
   if (!devices[currentRoom]) {
     return <div>No devices in this room.</div>;
   }
@@ -22,6 +22,8 @@ function DeviceList({ currentRoom, devices, onDeviceToggle, onDeviceRemove, onSc
           onToggle={onDeviceToggle}
           onRemove={onDeviceRemove}
           onSchedule={() => onScheduleOpen(device.name)}
+          onBrightness={onBrightnessOpen}
+          deviceStatus={deviceStatus}
           role={role}
         />
       ))}

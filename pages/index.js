@@ -55,7 +55,6 @@ function LoginPage() {
     localStorage.setItem('userRole', selectedRole);
     localStorage.setItem('username', username);
     logLoginActivity(username, selectedRole);
-    // Use router.push to go to /home after login
     router.push('/home');
   };
 

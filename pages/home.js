@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import SelectRoom from '../components/SelectRoom';
@@ -12,6 +12,8 @@ import Hamburger from '../components/Hamburger';
 import Sidebar from '../components/Sidebar';   
 
 const NOTIFICATIONS_API = "https://qaw7e8om7e.execute-api.eu-west-2.amazonaws.com/dev/notifications";
+const DEVICE_CONTROL_API = "https://qibrmmxfwg.execute-api.eu-west-2.amazonaws.com/dev/devicecontrol";
+const DEVICE_STATUS_API = "https://atbla8g6p3.execute-api.eu-west-2.amazonaws.com/dev/commands";
 
 async function sendScheduleNotification({ username, device, room, turnOnTime, turnOffTime }) {
     const message = `Device "${device}" in room "${room}" scheduled by ${username} (ON: ${turnOnTime}, OFF: ${turnOffTime})`;
@@ -43,6 +45,10 @@ function HomePage() {
   const [onTimeInput, setOnTimeInput] = useState('');
   const [offTimeInput, setOffTimeInput] = useState('');
   const [role, setRole] = useState('');
+  const [deviceStatus, setDeviceStatus] = useState({});
+  const [brightnessModalVisible, setBrightnessModalVisible] = useState(false);
+  const [brightnessValue, setBrightnessValue] = useState(100);
+  const [brightnessDevice, setBrightnessDevice] = useState({ room: '', index: -1, name: '' });
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -87,10 +93,43 @@ function HomePage() {
     localStorage.setItem('devices', JSON.stringify(devices));
   }, [rooms, devices]);
 
+   const fetchDeviceStatus = async (deviceIdToFetch) => {
+   if (!deviceIdToFetch) return;
+   try {
+  const response = await fetch(`${DEVICE_STATUS_API}?deviceId=${deviceIdToFetch}`);
+   if (!response.ok) {
+   throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const data = await response.json();
+
+  setDeviceStatus(prevStatus => ({
+   ...prevStatus,
+   [deviceIdToFetch]: data
+  }));
+  } catch (error) {
+  console.error(`Error fetching status for ${deviceIdToFetch}:`, error);
+  setDeviceStatus(prevStatus => ({
+  ...prevStatus,
+  [deviceIdToFetch]: { status: 'UNKNOWN' }
+   }));
+  }
+  };
+
+  useEffect(() => {
+    const ledDeviceId = 'led'; 
+    fetchDeviceStatus(ledDeviceId);
+
+  const interval = setInterval(() => {
+   fetchDeviceStatus(ledDeviceId);
+  }, 5000); 
+
+  return () => clearInterval(interval);
+  }, []); 
+
   useEffect(() => {
     const getLastLogged = () => JSON.parse(localStorage.getItem('lastScheduledLog') || '{}');
     const setLastLogged = (obj) => localStorage.setItem('lastScheduledLog', JSON.stringify(obj));
-    const interval = setInterval(() => {
+    const interval = setInterval(async () => {
       const now = new Date();
       const currentTime = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
       const schedules = JSON.parse(localStorage.getItem('deviceSchedules')) || {};
@@ -98,39 +137,49 @@ function HomePage() {
       const updatedDevices = { ...latestDevices };
       let changed = false;
       let lastLogged = getLastLogged();
-      rooms.forEach(room => {
+      for (const room of rooms) {
         const roomSchedules = schedules[room] || [];
-        if (!updatedDevices[room]) return;
-        updatedDevices[room] = updatedDevices[room].map(device => {
+        if (!updatedDevices[room]) continue;
+        updatedDevices[room] = await Promise.all(updatedDevices[room].map(async device => {
           const schedule = roomSchedules.find(s => {
             return s.deviceName === device.name && (s.roomName === room || !s.roomName);
           });
           if (schedule) {
-            console.log(`[Schedule Polling] Comparing for device '${device.name}' in room '${room}':`, {
-              turnOnTime: schedule.turnOnTime,
-              turnOffTime: schedule.turnOffTime,
-              currentTime
-            });
             if (schedule.turnOnTime === currentTime) {
               if (!device.state) changed = true;
               const username = localStorage.getItem('username');
-            const logKey = `${room}_${device.name}_ON`;
-            if (username && lastLogged[logKey] !== currentTime) {
-              const log = {
-                device: device.name,
-                room: room,
-                action: 'ON',
-                timestamp: new Date().toISOString(),
-                username: username
-              };
-              fetch('https://75e60r3zm0.execute-api.eu-west-2.amazonaws.com/dev/device-usage-logs', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(log)
-              }).catch(err => console.error('Error logging scheduled ON:', err));
-              lastLogged[logKey] = currentTime;
-              setLastLogged(lastLogged);
-            }
+              const logKey = `${room}_${device.name}_ON`;
+              if (username && lastLogged[logKey] !== currentTime) {
+                const log = {
+                  device: device.name,
+                  room: room,
+                  action: 'ON',
+                  timestamp: new Date().toISOString(),
+                  username: username
+                };
+                fetch('https://75e60r3zm0.execute-api.eu-west-2.amazonaws.com/dev/device-usage-logs', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(log)
+                }).catch(err => console.error('Error logging scheduled ON:', err));
+                lastLogged[logKey] = currentTime;
+                setLastLogged(lastLogged);
+              }
+
+              try {
+                await fetch(DEVICE_CONTROL_API, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    deviceId: device.name.toLowerCase(),
+                    state: 'ON',
+                    brightness: 100
+                  })
+                });
+                fetchDeviceStatus(device.name.toLowerCase());
+              } catch (err) {
+                console.error('Error sending scheduled ON to backend:', err);
+              }
               return { ...device, state: true };
             }
             if (schedule.turnOffTime === currentTime) {
@@ -139,29 +188,45 @@ function HomePage() {
               const logKey = `${room}_${device.name}_OFF`;
               if (username && lastLogged[logKey] !== currentTime) {
                 const log = {
-                device: device.name,
-                room: room,
-                action: 'OFF',
-                timestamp: new Date().toISOString(),
-                username: username
-              };
-              fetch('https://75e60r3zm0.execute-api.eu-west-2.amazonaws.com/dev/device-usage-logs', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(log)
-              }).catch(err => console.error('Error logging scheduled OFF:', err));
-              lastLogged[logKey] = currentTime;
-              setLastLogged(lastLogged);
-            }
-            return { ...device, state: false };
+                  device: device.name,
+                  room: room,
+                  action: 'OFF',
+                  timestamp: new Date().toISOString(),
+                  username: username
+                };
+                fetch('https://75e60r3zm0.execute-api.eu-west-2.amazonaws.com/dev/device-usage-logs', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(log)
+                }).catch(err => console.error('Error logging scheduled OFF:', err));
+                lastLogged[logKey] = currentTime;
+                setLastLogged(lastLogged);
+              }
+
+              try {
+                await fetch(DEVICE_CONTROL_API, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    deviceId: device.name.toLowerCase(),
+                    state: 'OFF',
+                    brightness: 0
+                  })
+                });
+                fetchDeviceStatus(device.name.toLowerCase());
+              } catch (err) {
+                console.error('Error sending scheduled OFF to backend:', err);
+              }
+              return { ...device, state: false };
             }
           }
           return { ...device };
-        });
-      });
+        }));
+      }
       setDevices(updatedDevices);
       localStorage.setItem('devices', JSON.stringify(updatedDevices));
       if (changed) {
+
       }
     }, 5000);
     return () => clearInterval(interval);
@@ -231,6 +296,37 @@ function HomePage() {
     setAddModalInputValue('');
   };
 
+  const handleSetBrightness = async () => {
+    const { room, index, name } = brightnessDevice;
+    if (!room || index === -1 || !name) return;
+
+    const commandPayload = {
+      deviceId: name.toLowerCase(),
+      state: 'ON',
+      brightness: brightnessValue
+    };
+    try {
+      const response = await fetch(DEVICE_CONTROL_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(commandPayload)
+      });
+      const responseData = await response.json();
+      if (!response.ok) throw new Error(responseData.message || 'Failed to set intensity');
+      setDevices(prev => {
+        const updated = { ...prev };
+        if (updated[room] && updated[room][index]) {
+          updated[room][index].state = true;
+        }
+        return updated;
+      });
+      setBrightnessModalVisible(false);
+      fetchDeviceStatus(name.toLowerCase());
+    } catch (error) {
+      alert('Failed to set intensity: ' + error.message);
+    }
+  };
+
   const handleDeviceToggle = async (room, index, newState, deviceName) => {
     const updatedDevices = { ...devices };
     if (updatedDevices[room] && updatedDevices[room][index]) {
@@ -254,6 +350,30 @@ function HomePage() {
         } catch (err) {
           console.error('Error logging device action:', err);
         }
+      }
+
+      const commandPayload = {
+        deviceId: deviceName.toLowerCase(),
+        state: newState ? 'ON' : 'OFF',
+        brightness: newState ? 100 : 0
+      };
+      try {
+        const response = await fetch(DEVICE_CONTROL_API, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(commandPayload)
+        });
+        const responseData = await response.json();
+        if (!response.ok) {
+          throw new Error(responseData.message || 'Failed to send command to IoT Core.');
+        }
+        fetchDeviceStatus(deviceName.toLowerCase());
+      } catch (error) {
+        alert(`Failed to control device: ${error.message}`);
+        updatedDevices[room][index].state = !newState;
+        setDevices(updatedDevices);
       }
       console.log(`Device "${updatedDevices[room][index].name}" in "${room}" turned ${newState}`);
     }
@@ -345,6 +465,23 @@ function HomePage() {
     }
   };
 
+  const handleBrightnessOpen = (room, index, deviceName) => {
+    setBrightnessDevice({ room, index, name: deviceName });
+    // Try to get current brightness from deviceStatus
+    const status = deviceStatus[deviceName.toLowerCase()];
+    if (status && typeof status.brightness === 'number') {
+      setBrightnessValue(status.brightness);
+    } else {
+      setBrightnessValue(100);
+    }
+    setBrightnessModalVisible(true);
+  };
+
+  const handleBrightnessClose = () => {
+    setBrightnessModalVisible(false);
+    setBrightnessDevice({ room: '', index: -1, name: '' });
+  };
+
   return (
     <div>
       <Head>
@@ -382,6 +519,8 @@ function HomePage() {
             onDeviceToggle={handleDeviceToggle}
             onDeviceRemove={handleDeviceRemove}
             onScheduleOpen={handleScheduleOpen}
+            onBrightnessOpen={handleBrightnessOpen} 
+            deviceStatus={deviceStatus}
             role={role}
           />
         </section>
@@ -406,6 +545,28 @@ function HomePage() {
         onSaveSchedule={handleSaveSchedule}
         onClose={handleScheduleClose}
       />
+
+      {brightnessModalVisible && (
+        <div className="modal is-active" style={{ display: 'block' }}>
+          <div className="modal-background" onClick={handleBrightnessClose}></div>
+          <div className="modal-content" style={{ maxWidth: 400, margin: 'auto', background: '#fff', borderRadius: 8, padding: 24, boxShadow: '0 2px 16px rgba(0,0,0,0.15)' }}>
+            <span className="close" onClick={handleBrightnessClose} style={{ float: 'right', fontSize: 24, cursor: 'pointer' }}>&times;</span>
+            <h3 style={{ marginBottom: 16 }}>Set Intensity for {brightnessDevice.name}</h3>
+            <label htmlFor="brightness-range" style={{ display: 'block', marginBottom: 8 }}>Intensity (0-100):</label>
+            <input
+              id="brightness-range"
+              type="range"
+              min="0"
+              max="100"
+              value={brightnessValue}
+              onChange={e => setBrightnessValue(Number(e.target.value))}
+              style={{ width: '100%' }}
+            />
+            <div style={{ textAlign: 'center', margin: '10px 0', fontWeight: 600 }}>{brightnessValue}%</div>
+            <button onClick={handleSetBrightness} style={{ width: '100%', background: 'linear-gradient(90deg, #f9d423 0%, #ff4e50 100%)', color: '#fff', border: 'none', borderRadius: 20, padding: '10px 0', fontWeight: 600, fontSize: 16, marginTop: 12 }}>Set Intensity</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
